@@ -19,7 +19,7 @@ of torrents and the categories assigned to them. It constructs a list of words
 and the number of times they have been seen in each category. To guess the
 category of an unknown title, it adds up the (normalised) frequencies of use of
 each word in the title for each category and presents the result as a list of
-probably categories in descending order.
+probable categories in descending order.
 
 Requirements
 ------------
