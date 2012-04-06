@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-function pad(c, n, s) {
-  return s + (new Array(Math.max(n + 1 - s.length, 0))).join(c);
-}
-
 var fs = require("fs"),
     async = require("async"),
     mongo = require("mongoskin"),
