@@ -33,6 +33,30 @@ var mr_words_r = function(k, vs) {
 
 jobs.push({m: mr_words_m, r: mr_words_r, o: "words"});
 
+var mr_groups_m = function() {
+  var category = this.category.title;
+  var m = this.title.match(/^\[(.+?)\]/);
+  if (m) {
+    var o = {total: 1};
+    o[category] = 1;
+    emit(m[1], o);
+  }
+};
+
+var mr_groups_r = function(k, vs) {
+  var res = {};
+
+  vs.forEach(function(v) {
+    for (var i in v) {
+      res[i] = (res[i] || 0) + v[i];
+    }
+  });
+
+  return res;
+};
+
+jobs.push({m: mr_groups_m, r: mr_groups_r, o: "groups"});
+
 var mr_types_m = function() {
   var category = this.category.title;
 
