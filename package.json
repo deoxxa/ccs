@@ -20,6 +20,7 @@
   "dependencies": {
     "async": "0.1.x",
     "dht-bencode": "0.1.x",
+    "express": "2.5.x",
     "mongoskin": "0.3.x",
     "nyaatorrents": "0.0.x",
     "request": "2.9.x",
