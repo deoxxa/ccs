@@ -21,6 +21,9 @@ category of an unknown title, it adds up the (normalised) frequencies of use of
 each word in the title for each category and presents the result as a list of
 probable categories in descending order.
 
+As of 2012-04-06, it also does a similar operation on file types, file sizes and
+tracker domains.
+
 Requirements
 ------------
 
