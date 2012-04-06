@@ -13,19 +13,19 @@ var client = new nyaatorrents.Client("www.nyaa.eu", 80, "/");
 var torrents = mongo.db(process.env.MONGODB).collection("data");
 
 var q = async.queue(function(task, done) {
-  console.log("Starting on " + task.id);
-
   torrents.findOne({id: task.id.toString()}, function(err, doc) {
-    if (err) { return done(err); }
+    if (err) { console.log(err); return done(err); }
     if (doc) { return done(); }
 
+    console.log("Starting on " + task.id);
+
     client.details(task.id, function(err, entry) {
-      if (err) { return done(err); }
+      if (err) { console.log(err); return done(err); }
       if (!entry) { return done(); }
       if (!entry.title) { torrents.save({id: task.id.toString()}); return done(); }
 
       request({uri: "http://www.nyaa.eu/?page=download&tid=" + task.id, encoding: null}, function(err, res, data) {
-        if (err) { return done(err); }
+        if (err) { console.log(err); return done(err); }
         if (res.statusCode !== 200) { return done(); }
 
         try {
@@ -44,8 +44,8 @@ var q = async.queue(function(task, done) {
           trackers: torrent_util.get_trackers(decoded),
         };
 
-        fs.writeFile(__dirname + "/torrents/" + entry.title + ".torrent", data, function(err) {
-          if (err) { return done(err); }
+        fs.writeFile(__dirname + "/../torrents/" + entry.title.replace(/\//g, "_") + ".torrent", data, function(err) {
+          if (err) { console.log(err); return done(err); }
 
           torrents.save(entry, {safe: true}, done);
         });
@@ -54,7 +54,7 @@ var q = async.queue(function(task, done) {
   });
 }, 25);
 
-for (var i=200000;i<210000;++i) {
+for (var i=300000;i<=302308;++i) {
   q.push({id: i});
 }
 
