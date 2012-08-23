@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/deoxxa/ccs.png)](http://travis-ci.org/deoxxa/ccs)
 Content Classification System
 =============================
 
